@@ -1,0 +1,40 @@
+{
+  "scope": {
+    "domain": "kwachahelper.com",
+    "owner": "Site brand shown: KwachaHelper; legal operator not independently verified",
+    "authorization": "Bounded public-metadata review authorized by the requester",
+    "collection_mode": "recorded_public_metadata_review",
+    "assessment_date": "2026-11-23",
+    "evidence_note": "Recorded observations from bounded DNS and HTTPS homepage checks. The local report application does not contact the target."
+  },
+  "observations": [
+    {
+      "id": "DNS-01",
+      "category": "dns_record",
+      "source": "System resolver, Cloudflare DNS (1.1.1.1), and Google Public DNS (8.8.8.8)",
+      "observed_at": "2026-11-23",
+      "value": {"record_type": "A", "name": "kwachahelper.com", "status": "answer", "address": "8.209.69.209"}
+    },
+    {
+      "id": "DNS-02",
+      "category": "dns_record",
+      "source": "System resolver, Cloudflare DNS (1.1.1.1), and Google Public DNS (8.8.8.8)",
+      "observed_at": "2026-11-23",
+      "value": {"record_type": "AAAA", "name": "kwachahelper.com", "status": "no_answer", "detail": "Negative SOA response; no AAAA address answer was returned"}
+    },
+    {
+      "id": "HTTP-01",
+      "category": "public_page",
+      "source": "HTTPS GET of the exact homepage URL via browser-backed fetch",
+      "observed_at": "2026-11-23",
+      "value": {"url": "https://kwachahelper.com/", "content_received": true, "title": "KwachaHelper", "description": "Online short-term lending platform in Malawi", "embedded_app_frame": true}
+    },
+    {
+      "id": "HTTP-02",
+      "category": "http_reachability",
+      "source": "HTTPS HEAD request to the exact homepage URL",
+      "observed_at": "2026-11-23",
+      "value": {"url": "https://kwachahelper.com/", "status": "timeout", "elapsed_seconds": 19.9, "detail": "No response headers were received"}
+    }
+  ]
+}

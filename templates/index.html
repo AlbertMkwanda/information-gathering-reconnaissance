@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bounded public-metadata review results for kwachahelper.com.">
+  <title>KwachaHelper · Public metadata report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Reconnaissance report home"><span class="brand-mark">K</span><span>KAFUKUFUKU <small>PUBLIC METADATA REVIEW</small></span></a>
+      <nav aria-label="Main navigation"><a href="#findings">Findings</a><a href="#evidence">Evidence</a><a href="#limits">Scope &amp; limits</a><a class="repo" href="https://github.com/AlbertMkwanda/information-gathering-and-reconnaissance">Source project</a></nav>
+    </header>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">COMPREHENSION 3 · SERIAL 01 · ALBERT MKWANDA</p>
+        <h1>Information Gathering<br> &amp; Reconnaissance</h1>
+        <p class="lead">A bounded public-information review of kwachahelper.com. The homepage identifies KwachaHelper as a Malawi lending platform. Its A record resolved to 8.209.69.209; the HTTPS HEAD request timed out.</p>
+        <a class="button" href="#findings">Review findings <span aria-hidden="true">↓</span></a>
+      </div>
+      <aside class="scope-card">
+        <span class="label">Authorized review scope</span>
+        <strong>{{ report.scope.domain }}</strong>
+        <p>{{ report.scope.owner }}</p>
+        <div class="scope-row"><span>Mode</span><b>Saved review evidence</b></div>
+        <div class="scope-row"><span>Observed artifacts</span><b>{{ report.observation_count }}</b></div>
+        <div class="scope-row"><span>Assessment date</span><b>{{ report.scope.assessment_date }}</b></div>
+      </aside>
+    </section>
+    <p class="notice"><strong>Safety &amp; scope:</strong> {{ report.collection_statement }}</p>
+    <section class="metrics" aria-label="Report summary">
+      <article><span>Evidence items</span><strong>{{ report.observation_count }}</strong><small>Public metadata, source-labelled</small></article>
+      <article><span>Security findings</span><strong>{{ report.finding_count }}</strong><small>No vulnerability tests were performed</small></article>
+      <article><span>High severity</span><strong>{{ report.severity_summary.high }}</strong><small>No unsupported claims inferred</small></article>
+    </section>
+    <section id="findings" class="section">
+      <div class="section-heading"><div><p class="eyebrow">Assessment summary</p><h2>Findings for defensive review</h2></div><a href="/api/report">View report JSON ↗</a></div>
+      <div class="finding-grid">
+        {% for finding in report.findings %}
+        <article class="finding">
+          <div class="finding-top"><span class="finding-id">{{ finding.id }}</span><span class="severity severity-{{ finding.severity }}">{{ finding.severity }}</span></div>
+          <h3>{{ finding.title }}</h3>
+          <p>{{ finding.observation }}</p>
+          <div class="evidence-ref">Evidence: {% for evidence_id in finding.evidence_ids %}<a href="#{{ evidence_id }}">{{ evidence_id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</div>
+          <p class="recommendation"><strong>Recommendation</strong><br>{{ finding.recommendation }}</p>
+          <small>{{ finding.scope_note }}</small>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    <section id="evidence" class="section evidence-section">
+      <div class="section-heading"><div><p class="eyebrow">Evidence register</p><h2>Observed public metadata</h2></div><span class="pill">Local saved evidence</span></div>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Source</th><th>Observed value</th></tr></thead><tbody>
+      {% for item in report.observations %}
+        <tr id="{{ item.id }}"><td><strong>{{ item.id }}</strong></td><td>{{ item.category|replace('_',' ')|title }}</td><td>{{ item.source }}</td><td><code>{{ item.value|tojson }}</code></td></tr>
+      {% endfor %}
+      </tbody></table></div>
+    </section>
+    <section id="limits" class="limits">
+      <div><p class="eyebrow">Interpret responsibly</p><h2>Evidence is a starting point, not proof of compromise.</h2></div>
+      <ul>{% for limitation in report.limitations %}<li>{{ limitation }}</li>{% endfor %}</ul>
+    </section>
+    <footer><span>Albert Mkwanda · Registration 23311351001 · Serial 1</span><span>Bounded metadata review · <a href="https://github.com/AlbertMkwanda/information-gathering-and-reconnaissance">Project source</a></span></footer>
+  </main>
+</body>
+</html>

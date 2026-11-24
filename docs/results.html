@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Results · Information Gathering &amp; Reconnaissance</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><div class="wrap"><header class="nav"><a href="index.html">ALBERT MKWANDA · SERIAL 01</a><nav class="links"><a href="index.html">Overview</a><a href="methodology.html">Method</a><a href="results.html">Results</a><a href="https://github.com/AlbertMkwanda/information-gathering-and-reconnaissance">Repository</a></nav></header>
+<main><p class="eyebrow">Results &amp; verification</p><h1>Four observations. No vulnerability tests.</h1><p>These checks covered public DNS and the HTTPS homepage at kwachahelper.com on 23 November 2026.</p>
+<article><h2>DNS-01 · A record</h2><p>The system resolver, Cloudflare DNS (1.1.1.1), and Google Public DNS (8.8.8.8) all returned 8.209.69.209.</p></article>
+<article><h2>DNS-02 · AAAA lookup</h2><p>The resolvers returned a negative SOA response, with no IPv6 address answer.</p></article>
+<article><h2>HTTP-01 · Homepage GET</h2><p>The page title was “KwachaHelper.” Its description calls it an online short-term lending platform in Malawi. The HTML embeds an app frame; the review did not open it.</p></article>
+<article><h2>HTTP-02 · Homepage HEAD</h2><p>The request timed out after about 20 seconds. No response headers came back.</p></article>
+<section class="panel"><h2>Conclusion</h2><p>These checks do not establish whether the service is vulnerable or secure. No security findings are claimed, and the legal operator was not independently verified.</p></section>
+<section class="panel"><h2>Testing</h2><p>Run <code>py -m unittest discover -s tests -v</code> to test the report app's scope checks, saved observations, API output, and local Waitress server. The app does not contact kwachahelper.com.</p></section>
+</main><footer>Albert Mkwanda · 23311351001 · Serial 1</footer></div></body></html>
